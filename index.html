@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>T.H. Chamathka Prabhashana · FullStack Developer & UI/UX Enthusiast</title>
+  <!-- Google Fonts + Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Light theme (default) */
+    :root {
+      --bg-body: #fefefc;
+      --bg-surface: #ffffff;
+      --bg-card: #ffffff;
+      --bg-code: #f8fafd;
+      --bg-cta: #f0f4fa;
+      --text-primary: #1a1e2b;
+      --text-secondary: #2c3e66;
+      --text-muted: #4a5b7e;
+      --border-light: #e9eef3;
+      --border-card: #edf2f7;
+      --accent: #1e2a5e;
+      --accent-hover: #0f1a42;
+      --accent-soft: rgba(30,42,94,0.08);
+      --shadow-sm: 0 8px 20px rgba(0,0,0,0.02), 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    /* Dark theme - deep elegant background */
+    body.dark {
+      --bg-body: #0a0c15;
+      --bg-surface: #11141f;
+      --bg-card: #131725;
+      --bg-code: #0e111b;
+      --bg-cta: #0f1320;
+      --text-primary: #edf2ff;
+      --text-secondary: #b9c7e6;
+      --text-muted: #8d9ac0;
+      --border-light: #252b3d;
+      --border-card: #232838;
+      --accent: #5f7fbf;
+      --accent-hover: #7c9ad9;
+      --accent-soft: rgba(95,127,191,0.12);
+      --shadow-sm: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-body);
+      color: var(--text-primary);
+      line-height: 1.5;
+      scroll-behavior: smooth;
+      transition: background 0.25s ease, color 0.2s ease;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* navbar & theme toggle */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .logo {
+      font-size: 1.9rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, var(--accent), #7c9ad9);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      font-weight: 500;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* theme toggle button */
+    .theme-toggle {
+      background: var(--accent-soft);
+      border: 1px solid var(--border-light);
+      border-radius: 40px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      transition: all 0.2s;
+    }
+
+    .theme-toggle i {
+      font-size: 1rem;
+      color: var(--accent);
+    }
+
+    .theme-toggle:hover {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+    .theme-toggle:hover i {
+      color: white;
+    }
+
+    /* buttons */
+    .btn-primary {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 0.7rem 1.6rem;
+      border-radius: 36px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.25s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 20px -8px rgba(0,0,0,0.2);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--accent);
+      color: var(--accent);
+      padding: 0.7rem 1.6rem;
+      border-radius: 36px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .btn-outline:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    /* hero */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+      padding: 4rem 0 3rem 0;
+    }
+    .hero-content {
+      flex: 1;
+    }
+    .hero-badge {
+      font-size: 0.9rem;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.3px;
+      font-weight: 500;
+    }
+    .hero-content h1 {
+      font-size: 3.4rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .highlight-name {
+      background: linear-gradient(120deg, var(--accent), #8aabf0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero-tagline {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+    .hero-desc {
+      color: var(--text-muted);
+      max-width: 90%;
+      margin-bottom: 2rem;
+    }
+    .hero-contact-info {
+      flex: 0.8;
+      background: var(--bg-surface);
+      border-radius: 32px;
+      padding: 1.8rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
+      backdrop-filter: blur(2px);
+    }
+    .info-row {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1.2rem;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+    .info-row i {
+      width: 28px;
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+
+    /* section */
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+      border-left: 5px solid var(--accent);
+      padding-left: 1.2rem;
+    }
+    .about-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      background: var(--bg-surface);
+      border-radius: 32px;
+      padding: 2rem;
+      border: 1px solid var(--border-light);
+      margin-bottom: 3rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .about-text {
+      flex: 2;
+    }
+    .about-stats {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      background: var(--bg-card);
+      border-radius: 28px;
+      padding: 1.5rem;
+      border: 1px solid var(--border-card);
+    }
+    .stat-item h4 {
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: var(--accent);
+    }
+
+    /* skills badges */
+    .skills-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .skill-badge {
+      background: var(--bg-card);
+      border-radius: 60px;
+      padding: 0.6rem 1.4rem;
+      font-weight: 500;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      border: 1px solid var(--border-card);
+      transition: 0.1s;
+      color: var(--text-secondary);
+    }
+    .skill-badge:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: scale(0.98);
+    }
+
+    /* projects */
+    .projects-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin: 2rem 0 3rem;
+    }
+    .project-card {
+      flex: 1 1 280px;
+      background: var(--bg-card);
+      border-radius: 28px;
+      padding: 1.6rem;
+      border: 1px solid var(--border-card);
+      transition: transform 0.2s, box-shadow 0.25s;
+      box-shadow: var(--shadow-sm);
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 25px 30px -12px rgba(0,0,0,0.2);
+      border-color: var(--accent);
+    }
+    .project-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+    .project-desc {
+      color: var(--text-muted);
+      margin: 0.8rem 0 1rem;
+      font-size: 0.9rem;
+    }
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.2rem;
+    }
+    .tech-stack span {
+      background: var(--accent-soft);
+      padding: 0.2rem 0.9rem;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+    .demo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--accent);
+    }
+    .view-all {
+      text-align: right;
+      margin-top: -1rem;
+      margin-bottom: 1rem;
+    }
+    .view-all a {
+      color: var(--accent);
+      font-weight: 500;
+      text-decoration: none;
+    }
+
+    /* CTA / contact */
+    .cta-section {
+      background: var(--bg-cta);
+      border-radius: 48px;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin: 3rem 0 2rem;
+      border: 1px solid var(--border-light);
+      backdrop-filter: blur(4px);
+    }
+    .cta-section h2 {
+      font-size: 1.9rem;
+      margin-bottom: 1rem;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 0 2.5rem;
+      border-top: 1px solid var(--border-light);
+      margin-top: 1rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 780px) {
+      .hero {
+        flex-direction: column;
+      }
+      .hero-content h1 {
+        font-size: 2.4rem;
+      }
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .section-title {
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <nav class="navbar">
+    <div class="logo">CP.</div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+      <button class="theme-toggle" id="darkModeToggle" aria-label="Dark mode">
+        <i class="fas fa-moon"></i> <span>Dark</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- hero section - updated to FullStack Developer -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">✦ FullStack Developer & UI/UX Enthusiast</div>
+      <h1>Hello, I’m <span class="highlight-name">T.H. Chamathka Prabhashana</span></h1>
+      <div class="hero-tagline">FullStack Developer & UI/UX Enthusiast</div>
+      <p class="hero-desc">I build end-to-end web applications — from database design to responsive frontends. Passionate about creating seamless digital experiences with modern full-stack technologies.</p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn-primary">View My Work →</a>
+        <a href="#contact" class="btn-outline">Contact Me →</a>
+      </div>
+    </div>
+    <div class="hero-contact-info">
+      <div class="info-row"><i class="fab fa-github"></i> <span>Chamathka123456</span></div>
+      <div class="info-row"><i class="fab fa-linkedin"></i> <span>chamathka-prbhashana</span></div>
+      <div class="info-row"><i class="fas fa-map-marker-alt"></i> <span>Gampaha, Sri Lanka</span></div>
+      <div class="info-row"><i class="fas fa-phone-alt"></i> <span>+94 76 763 9676</span></div>
+    </div>
+  </div>
+
+  <!-- about section -->
+  <section id="about">
+    <div class="section-title">About Me.</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p style="margin-bottom: 1.2rem; font-size: 1rem;">I'm a passionate FullStack Developer who loves turning ideas into fully functional, interactive web applications — from crafting robust backend APIs to designing responsive and intuitive user interfaces. I enjoy learning modern frameworks and solving real-world problems with clean, efficient code.</p>
+        <p>✨ Based in Sri Lanka, always eager to collaborate and push creative boundaries. Currently building full-stack projects and improving every day.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-item"><h4>🎓 Education</h4><p>Undergraduate<br>BSc (Hons) in Information Technology</p></div>
+        <div class="stat-item"><h4>🚀 Experience</h4><p>Learning & Building<br>Building projects and improving every day</p></div>
+        <div class="stat-item"><h4>🎯 Focus</h4><p>FullStack Development<br>MERN, Databases, Modern Frontend & APIs</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- skills section - updated with backend skills -->
+  <section id="skills" class="skills-section">
+    <div class="section-title">Skills.</div>
+    <div class="skills-cloud">
+      <span class="skill-badge">HTML/CSS</span>
+      <span class="skill-badge">JavaScript</span>
+      <span class="skill-badge">React</span>
+      <span class="skill-badge">Node.js</span>
+      <span class="skill-badge">Express</span>
+      <span class="skill-badge">MongoDB</span>
+      <span class="skill-badge">Tailwind CSS</span>
+      <span class="skill-badge">Git & GitHub</span>
+      <span class="skill-badge">REST APIs</span>
+      <span class="skill-badge">Bootstrap</span>
+    </div>
+  </section>
+
+  <!-- featured projects -->
+  <section id="projects">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
+      <div class="section-title">Featured Projects.</div>
+      <div class="view-all"><a href="#">View All Projects →</a></div>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-title">Personal Portfolio Website</div>
+        <div class="project-desc">Modern responsive portfolio with light/dark mode, built with HTML, CSS, JavaScript — fully optimized.</div>
+        <div class="tech-stack"><span>HTML/CSS</span><span>JavaScript</span><span>Dark Mode</span></div>
+        <a href="#" class="demo-link">Live Demo ▶️</a>
+      </div>
+      <div class="project-card">
+        <div class="project-title">E-Commerce UI</div>
+        <div class="project-desc">Responsive front-end e-commerce design with modern UX, cart simulation and dynamic components.</div>
+        <div class="tech-stack"><span>React</span><span>Tailwind CSS</span><span>JavaScript</span></div>
+        <a href="#" class="demo-link">Live Demo ▶️</a>
+      </div>
+      <div class="project-card">
+        <div class="project-title">Task Manager App</div>
+        <div class="project-desc">Full-stack task management with authentication, local storage (frontend) + Node.js backend ready.</div>
+        <div class="tech-stack"><span>MERN</span><span>Express</span><span>JWT</span><span>CSS</span></div>
+        <a href="#" class="demo-link">Live Demo ▶️</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA contact -->
+  <section id="contact">
+    <div class="cta-section">
+      <h2>Let's Work Together.</h2>
+      <p style="max-width: 550px; margin: 0.8rem auto 1.8rem; color: var(--text-muted);">I'm open to new opportunities — frontend, backend, or full-stack. Let's build something amazing together!</p>
+      <a href="#" class="btn-primary" style="background: var(--accent);">Get In Touch →</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2024 T.H. Chamathka Prabhashana. All rights reserved.</p>
+    <div style="margin-top: 0.8rem; display: flex; justify-content: center; gap: 1.5rem;">
+      <a href="#" style="color: var(--text-muted);"><i class="fab fa-github"></i></a>
+      <a href="#" style="color: var(--text-muted);"><i class="fab fa-linkedin"></i></a>
+      <a href="#" style="color: var(--text-muted);"><i class="fab fa-twitter"></i></a>
+    </div>
+  </footer>
+</div>
+
+<script>
+  (function() {
+    // Dark mode toggle with local storage and smooth icon update
+    const toggleBtn = document.getElementById('darkModeToggle');
+    const body = document.body;
+    
+    // Check for saved preference
+    const savedTheme = localStorage.getItem('portfolio-theme');
+    if (savedTheme === 'dark') {
+      body.classList.add('dark');
+      updateToggleUI(true);
+    } else if (savedTheme === 'light') {
+      body.classList.remove('dark');
+      updateToggleUI(false);
+    } else {
+      // if system preference is dark we set dark as default for better experience
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (prefersDark) {
+        body.classList.add('dark');
+        updateToggleUI(true);
+        localStorage.setItem('portfolio-theme', 'dark');
+      } else {
+        updateToggleUI(false);
+      }
+    }
+    
+    function updateToggleUI(isDark) {
+      if (toggleBtn) {
+        const icon = toggleBtn.querySelector('i');
+        const span = toggleBtn.querySelector('span');
+        if (isDark) {
+          icon.className = 'fas fa-sun';
+          span.innerText = 'Light';
+        } else {
+          icon.className = 'fas fa-moon';
+          span.innerText = 'Dark';
+        }
+      }
+    }
+    
+    function setDarkMode(enable) {
+      if (enable) {
+        body.classList.add('dark');
+        localStorage.setItem('portfolio-theme', 'dark');
+        updateToggleUI(true);
+      } else {
+        body.classList.remove('dark');
+        localStorage.setItem('portfolio-theme', 'light');
+        updateToggleUI(false);
+      }
+    }
+    
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        const isDark = body.classList.contains('dark');
+        setDarkMode(!isDark);
+      });
+    }
+    
+    // smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        const targetEl = document.querySelector(href);
+        if (targetEl) {
+          e.preventDefault();
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+    
+    // Live demo placeholder alerts (keep interactive but friendly)
+    const demoLinks = document.querySelectorAll('.demo-link');
+    demoLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        if (link.getAttribute('href') === '#') {
+          e.preventDefault();
+          alert('✨ FullStack demo coming soon! This portfolio shows my skills — deploy on Vercel and add your backend 🚀');
+        }
+      });
+    });
+    const ctaBtn = document.querySelector('.cta-section .btn-primary');
+    if (ctaBtn && ctaBtn.getAttribute('href') === '#') {
+      ctaBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert('📧 Thanks for reaching out! You can contact me at chamathka@fullstack.dev (demo). Let\'s collaborate!');
+      });
+    }
+    const viewAllLink = document.querySelector('.view-all a');
+    if(viewAllLink && viewAllLink.getAttribute('href') === '#') {
+      viewAllLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert('🚀 More exciting full-stack projects are under development. Stay tuned!');
+      });
+    }
+  })();
+</script>
+</body>
+</html>
